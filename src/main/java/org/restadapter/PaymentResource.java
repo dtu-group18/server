@@ -32,10 +32,16 @@ public class PaymentResource {
         return service.getPayment(customerId, merchantId);
     }
 
+    @DELETE
+    public void deletePayment(@QueryParam(value = "cid") String customerId,
+                             @QueryParam(value = "mid") String merchantId){
+        service.removePayment(customerId, merchantId);
+    }
+
 // @QueryParam(value = "cid") final String customerId
 
+    @GET
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("/hello")
     public String hello() {
         return "Payments";
     }

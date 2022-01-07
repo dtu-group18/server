@@ -56,4 +56,20 @@ public class PaymentRegister {
 
         return null;
     }
+
+    public void removePayment(String customerId, String merchantId) {
+
+        try {
+            for (Payment p: payments) {
+                if (p.getCostumerId().equals(customerId) && p.getMerchantId().equals(merchantId)) {
+                    payments.remove(p);
+                    break;
+                }
+            }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+    }
+
 }
