@@ -27,9 +27,17 @@ public class PaymentResource {
     }
 
     @GET
+    @Path("/test")
     @Produces(MediaType.APPLICATION_JSON)
     public Payment get(@QueryParam(value = "cid") final String customerId, @QueryParam(value = "mid") final String merchantId) {
         return service.getPayment(customerId, merchantId);
+    }
+
+    @POST
+    @Path("/add/{cid}/{mid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void add(@PathParam("cid") String customerId, @PathParam("mid") String merchantId) {
+        service.addPayment(new Payment("pid4", customerId, merchantId, 10));
     }
 
     @DELETE
