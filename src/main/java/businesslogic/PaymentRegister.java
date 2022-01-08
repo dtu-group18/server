@@ -16,17 +16,8 @@ public class PaymentRegister {
     final Set<String> customers = new HashSet<>();
     final Set<String> merchants = new HashSet<>();
 
-    private PaymentRegister(){
+    private PaymentRegister(){}
 
-        //The application knows a customer with id cid1 and a merchant with id mid1. No other customers and merchants are known.
-        final String customer = "cid1";
-        final String merchant = "mid1";
-
-        //add costumers
-        customers.add(customer);
-        //add merchants
-        merchants.add(merchant);
-    }
     //-----------------------------------------------------
 
     /**
@@ -73,20 +64,20 @@ public class PaymentRegister {
     public List<Payment> getPayments(){return payments;}
 
 
-    public Payment getPayment(String customerId, String merchantId) {
+    public Payment getPayment(String customerId, String merchantId, String amount) {
         // Get payment, if any
         for (Payment a: payments) {
-            if (a.getCostumerId().equals(customerId) && a.getMerchantId().equals(merchantId)) {
+            if (a.getCostumerId().equals(customerId) && a.getMerchantId().equals(merchantId) && a.getAmount().equals(amount)) {
                 return a;
             }
         }
         return null;
     }
 
-    public void removePayment(String customerId, String merchantId) {
+    public void removePayment(String customerId, String merchantId, String amount) {
         try {
             for (Payment p: payments) {
-                if (p.getCostumerId().equals(customerId) && p.getMerchantId().equals(merchantId)) {
+                if (p.getCostumerId().equals(customerId) && p.getMerchantId().equals(merchantId) && p.getAmount().equals(amount)) {
                     payments.remove(p);
                     break;
                 }
@@ -95,6 +86,11 @@ public class PaymentRegister {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public void addCostumerAndMerchant(String customerId, String merchantId) {
+        customers.add(customerId);
+        merchants.add(merchantId);
     }
 
 
