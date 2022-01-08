@@ -28,12 +28,12 @@ public class PaymentResource {
     }
 
     @POST
-    @Path("/add/{cid}/{mid}/{amount}")
+    @Path("/add")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response add(@PathParam("cid") String customerId, @PathParam("mid") String merchantId, @PathParam("amount") String amount) {
+    public Response add(Payment payment) {
         try {
-            service.addPayment(new Payment(customerId, merchantId, amount));
+            service.addPayment(payment);
             return Response.fromResponse(Response.status(Response.Status.OK).build()).build();
         } catch (NotFoundException e) {
             return Response.fromResponse(Response.status(Response.Status.NOT_FOUND.getStatusCode(), e.getMessage()).build()).build();
