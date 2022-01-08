@@ -1,7 +1,9 @@
 package businesslogic;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * class that represents a register of multiple payment objects
@@ -9,19 +11,23 @@ import java.util.List;
 public class PaymentRegister {
     //--------Singleton pattern-----------------------------
     private static PaymentRegister register = new PaymentRegister();
-    private PaymentRegister(){
-        addPayment(p1);
-        addPayment(p2);
-        addPayment(p3);
-    }
-    //-----------------------------------------------------
 
     private final List<Payment> payments = new ArrayList<>();
+    final Set<String> customers = new HashSet<>();
+    final Set<String> merchants = new HashSet<>();
 
-    private Payment p1 = new Payment("pid1", "cid1", "mid1", 1);
-    private Payment p2 = new Payment("pid2","cid2", "mid2", 2);
-    private Payment p3 = new Payment("pid3","cid3", "mid3", 3);
+    private PaymentRegister(){
 
+        //The application knows a customer with id cid1 and a merchant with id mid1. No other customers and merchants are known.
+        final String customer = "cid1";
+        final String merchant = "mid1";
+
+        //add costumers
+        customers.add(customer);
+        //add merchants
+        merchants.add(merchant);
+    }
+    //-----------------------------------------------------
 
     /**
      * method for getting the instance of the class
@@ -34,7 +40,13 @@ public class PaymentRegister {
      * Method for adding a person to the list (register)
      * @param payment the person to add
      */
-    public void addPayment(Payment payment){payments.add(payment);}
+    public void addPayment(Payment payment) throws NotFoundException {
+        //check for unknown costumer and merchant
+        if(!customers.contains(payment.getCostumerId())) throw new NotFoundException(String.format("customer with id %s is unknown", payment.getCostumerId()));
+        if(!merchants.contains(payment.getCostumerId())) throw new NotFoundException(String.format("merchant with id %s is unknown", payment.getMerchantId()));
+
+        payments.add(payment);
+    }
     //------------------------------------------------------------
 
 
@@ -53,12 +65,10 @@ public class PaymentRegister {
                 return a;
             }
         }
-
         return null;
     }
 
     public void removePayment(String customerId, String merchantId) {
-
         try {
             for (Payment p: payments) {
                 if (p.getCostumerId().equals(customerId) && p.getMerchantId().equals(merchantId)) {
@@ -71,5 +81,6 @@ public class PaymentRegister {
         }
 
     }
+
 
 }
