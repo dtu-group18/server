@@ -16,7 +16,7 @@ public class PaymentRegister {
     final Set<String> customers = new HashSet<>();
     final Set<String> merchants = new HashSet<>();
 
-    private PaymentRegister(){}
+    private PaymentRegister(){
 
     //-----------------------------------------------------
 
