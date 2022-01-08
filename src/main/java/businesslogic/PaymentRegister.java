@@ -16,8 +16,24 @@ public class PaymentRegister {
     final Set<String> customers = new HashSet<>();
     final Set<String> merchants = new HashSet<>();
 
+    final Set<Customer> customerReg = new HashSet<>();
+    final Set<Merchant> merchantReg = new HashSet<>();
+
     private PaymentRegister(){
 
+        //The application knows a customer with id cid1 and a merchant with id mid1. No other customers and merchants are known.
+        final String customer = "cid1";
+        final String merchant = "mid1";
+
+        // Add the resources and functions to Simple DTU Pay that allows
+        // to register a customer and a merchant with their respective names, CPR numbers, and bank account
+        // numbers. Note that customer and merchant have to have a bank account before they register with DTU Pay
+
+        //add costumers
+        customers.add(customer);
+        //add merchants
+        merchants.add(merchant);
+    }
     //-----------------------------------------------------
 
     /**
@@ -62,6 +78,8 @@ public class PaymentRegister {
 
 
     public List<Payment> getPayments(){return payments;}
+    public Set<Customer> getCustomerRegs(){return customerReg;}
+    public Set<Merchant> getMerchantRegs(){return merchantReg;}
 
 
     public Payment getPayment(String customerId, String merchantId, String amount) {
@@ -86,6 +104,60 @@ public class PaymentRegister {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    /**
+     * Register customers
+     *
+     * @param customer
+     */
+    public void addCustomer(Customer customer) {
+        customerReg.add(customer);
+    }
+
+    /**
+     * Register merchants
+     *
+     * @param merchant
+     */
+    public void addMerchant(Merchant merchant) {
+        merchantReg.add(merchant);
+    }
+
+    /**
+     * Remove customer from registration list
+     * @param customerId
+     */
+    public void removeCustomer(String customerId) {
+        try {
+            for (Customer c: customerReg) {
+                if (c.getCustomerId().equals(customerId)) {
+                    customerReg.remove(c);
+
+                    break;
+                }
+            }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Remove merchant from registration list
+     * @param merchantId
+     */
+    public void removeMerchant(String merchantId) {
+        try {
+            for (Merchant m: merchantReg) {
+                if (m.getMerchantId().equals(merchantId)) {
+                    merchantReg.remove(m);
+
+                    break;
+                }
+            }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void addCostumerAndMerchant(String customerId, String merchantId) {
