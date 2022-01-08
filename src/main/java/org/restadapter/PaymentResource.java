@@ -34,7 +34,7 @@ public class PaymentResource {
     public Response add(@PathParam("cid") String customerId, @PathParam("mid") String merchantId) {
         try {
             service.addPayment(new Payment("pid4", customerId, merchantId, 10));
-            return Response.fromResponse(Response.status(Response.Status.NOT_FOUND).build()).build();
+            return Response.fromResponse(Response.status(Response.Status.OK).build()).build();
         } catch (NotFoundException e) {
             return Response.fromResponse(Response.status(Response.Status.NOT_FOUND.getStatusCode(), e.getMessage()).build()).build();
         }
