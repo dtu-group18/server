@@ -23,17 +23,17 @@ public class PaymentResource {
     @GET
     @Path("/test")
     @Produces(MediaType.APPLICATION_JSON)
-    public Payment get(@QueryParam(value = "cid") final String customerId, @QueryParam(value = "mid") final String merchantId) {
-        return service.getPayment(customerId, merchantId);
+    public Payment get(@QueryParam(value = "cid") final String customerId, @QueryParam(value = "mid") final String merchantId, @QueryParam(value = "amount") String amount) {
+        return service.getPayment(customerId, merchantId, amount);
     }
 
     @POST
     @Path("/add/{cid}/{mid}/{amount}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response add(@PathParam("cid") String customerId, @PathParam("mid") String merchantId, @PathParam("amount") Double amount) {
+    public Response add(@PathParam("cid") String customerId, @PathParam("mid") String merchantId, @PathParam("amount") String amount) {
         try {
-            service.addPayment(new Payment("pid4", customerId, merchantId, amount));
+            service.addPayment(new Payment(customerId, merchantId, amount));
             return Response.fromResponse(Response.status(Response.Status.OK).build()).build();
         } catch (NotFoundException e) {
             return Response.fromResponse(Response.status(Response.Status.NOT_FOUND.getStatusCode(), e.getMessage()).build()).build();
@@ -42,11 +42,10 @@ public class PaymentResource {
 
     @DELETE
     public void deletePayment(@QueryParam(value = "cid") String customerId,
-                             @QueryParam(value = "mid") String merchantId){
-        service.removePayment(customerId, merchantId);
+                              @QueryParam(value = "mid") String merchantId,
+                              @QueryParam(value = "amount") String amount){
+        service.removePayment(customerId, merchantId, amount);
     }
-
-// @QueryParam(value = "cid") final String customerqId
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)

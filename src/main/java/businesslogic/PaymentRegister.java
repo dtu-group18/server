@@ -49,20 +49,20 @@ public class PaymentRegister {
     public List<Payment> getPayments(){return payments;}
 
 
-    public Payment getPayment(String customerId, String merchantId) {
+    public Payment getPayment(String customerId, String merchantId, String amount) {
         // Get payment, if any
         for (Payment a: payments) {
-            if (a.getCostumerId().equals(customerId) && a.getMerchantId().equals(merchantId)) {
+            if (a.getCostumerId().equals(customerId) && a.getMerchantId().equals(merchantId) && a.getAmount().equals(amount)) {
                 return a;
             }
         }
         return null;
     }
 
-    public void removePayment(String customerId, String merchantId) {
+    public void removePayment(String customerId, String merchantId, String amount) {
         try {
             for (Payment p: payments) {
-                if (p.getCostumerId().equals(customerId) && p.getMerchantId().equals(merchantId)) {
+                if (p.getCostumerId().equals(customerId) && p.getMerchantId().equals(merchantId) && p.getAmount().equals(amount)) {
                     payments.remove(p);
                     break;
                 }
