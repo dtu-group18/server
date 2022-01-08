@@ -10,5 +10,7 @@ import lombok.Data;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Payment {
-   private String costumerId, merchantId, amount;
+   public String costumerId, merchantId, amount;
+
+
 }
