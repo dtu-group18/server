@@ -40,12 +40,6 @@ public class PaymentRegister {
     }
     //------------------------------------------------------------
 
-
-    public Customer getCostumer(String costumerID){
-        return new Customer(costumerID);
-    }
-
-
     public List<Payment> getPayments(){return payments;}
 
 

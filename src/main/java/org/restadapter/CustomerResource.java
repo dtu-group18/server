@@ -13,12 +13,6 @@ import javax.ws.rs.core.MediaType;
 public class CustomerResource {
     PaymentRegister service = PaymentRegister.getRegister();
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Customer getCustomer(@PathParam("cid") String customerId){
-        return service.getCostumer(customerId);
-    }
-
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/hello")
     public String hello() {
