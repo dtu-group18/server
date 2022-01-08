@@ -49,9 +49,24 @@ public class PaymentRegister {
     }
     //------------------------------------------------------------
 
+    public Customer getCustomer(String customerId) {
+        // Get customer, if any
+        for (Customer c: customerReg) {
+            if (c.getCustomerId().equals(customerId)) {
+                return c;
+            }
+        }
+        return null;
+    }
 
-    public Customer getCostumer(String costumerID){
-        return new Customer(costumerID);
+    public Merchant getMerchant(String merchantId){
+        // Get merchant, if any
+        for (Merchant m: merchantReg) {
+            if (m.getMerchantId().equals(merchantId)) {
+                return m;
+            }
+        }
+        return null;
     }
 
 
