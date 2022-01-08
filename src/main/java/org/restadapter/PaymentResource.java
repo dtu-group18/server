@@ -28,12 +28,12 @@ public class PaymentResource {
     }
 
     @POST
-    @Path("/add/{cid}/{mid}")
+    @Path("/add/{cid}/{mid}/{amount}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response add(@PathParam("cid") String customerId, @PathParam("mid") String merchantId) {
+    public Response add(@PathParam("cid") String customerId, @PathParam("mid") String merchantId, @PathParam("amount") Double amount) {
         try {
-            service.addPayment(new Payment("pid4", customerId, merchantId, 10));
+            service.addPayment(new Payment("pid4", customerId, merchantId, amount));
             return Response.fromResponse(Response.status(Response.Status.OK).build()).build();
         } catch (NotFoundException e) {
             return Response.fromResponse(Response.status(Response.Status.NOT_FOUND.getStatusCode(), e.getMessage()).build()).build();
@@ -53,4 +53,15 @@ public class PaymentResource {
     public String hello() {
         return "Payments";
     }
+
+    @POST
+    @Path("/add/{cid}/{mid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addCostumerAndMerchant(@PathParam("cid") String customerId, @PathParam("mid") String merchantId) {
+        service.addCostumerAndMerchant(customerId, merchantId);
+        return Response.fromResponse(Response.status(Response.Status.OK).build()).build();
+    }
+
+
 }

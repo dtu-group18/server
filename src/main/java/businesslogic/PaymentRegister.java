@@ -16,17 +16,8 @@ public class PaymentRegister {
     final Set<String> customers = new HashSet<>();
     final Set<String> merchants = new HashSet<>();
 
-    private PaymentRegister(){
+    private PaymentRegister(){}
 
-        //The application knows a customer with id cid1 and a merchant with id mid1. No other customers and merchants are known.
-        final String customer = "cid1";
-        final String merchant = "mid1";
-
-        //add costumers
-        customers.add(customer);
-        //add merchants
-        merchants.add(merchant);
-    }
     //-----------------------------------------------------
 
     /**
@@ -80,6 +71,11 @@ public class PaymentRegister {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public void addCostumerAndMerchant(String customerId, String merchantId) {
+        customers.add(customerId);
+        merchants.add(merchantId);
     }
 
 
