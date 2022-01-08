@@ -42,7 +42,7 @@ public class PaymentRegister {
      */
     public void addPayment(Payment payment) throws NotFoundException {
         //check for unknown costumer and merchant
-        if(!customers.contains(payment.getCostumerId())) throw new NotFoundException(String.format("customer with id %s is unknown", payment.getCostumerId()));
+        if(!customers.contains(payment.getCostumerId())) throw new NotFoundException(String.format("costumer with id %s is unknown", payment.getCostumerId()));
         if(!merchants.contains(payment.getMerchantId())) throw new NotFoundException(String.format("merchant with id %s is unknown", payment.getMerchantId()));
 
         payments.add(payment);

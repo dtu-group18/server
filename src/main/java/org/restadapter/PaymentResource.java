@@ -30,12 +30,13 @@ public class PaymentResource {
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response add(Payment payment) {
         try {
             service.addPayment(payment);
             return Response.status(Response.Status.OK).build();
         } catch (NotFoundException e) {
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
+            return Response.status(Response.Status.NOT_FOUND.getStatusCode()).header("errMsg", e.getMessage()).build();
         }
     }
 
