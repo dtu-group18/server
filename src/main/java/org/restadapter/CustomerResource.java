@@ -2,6 +2,7 @@ package org.restadapter;
 
 import businesslogic.Customer;
 import java.util.Set;
+import java.util.UUID;
 
 import businesslogic.NotFoundException;
 import businesslogic.PaymentRegister;
@@ -22,24 +23,16 @@ public class CustomerResource {
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{cid}/{name}/{cpr}/{account}")
-    public String register(@PathParam("cid") String customerId,
-                             @PathParam("name") String name,
-                             @PathParam("cpr") String cpr,
-                             @PathParam("account") String account)
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/registration")
+    public String register(Customer customer)
     {
-        // Create customer model
-        Customer newCustomer = new Customer();
-        newCustomer.setCustomerId(customerId);
-        newCustomer.setName(name);
-        newCustomer.setCpr(cpr);
-        newCustomer.setBankAccount(account);
-
         // Add customer
-        service.addCustomer(newCustomer);
+        customer.setCustomerId(UUID.randomUUID().toString());
+        service.addCustomer(customer);
 
-        return customerId;
+        return customer.getCustomerId();
     }
 
     @DELETE

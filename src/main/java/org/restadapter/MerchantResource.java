@@ -9,6 +9,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Set;
+import java.util.UUID;
 
 @Path("/merchant")
 public class MerchantResource {
@@ -35,24 +36,16 @@ public class MerchantResource {
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{mid}/{name}/{cpr}/{account}")
-    public String register(@PathParam("mid") String merchantId,
-                             @PathParam("name") String name,
-                             @PathParam("cpr") String cpr,
-                             @PathParam("account") String account)
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/registration")
+    public String register(Merchant merchant)
     {
-        // Create merchant model
-        Merchant newMerchant = new Merchant();
-        newMerchant.setMerchantId(merchantId);
-        newMerchant.setName(name);
-        newMerchant.setCpr(cpr);
-        newMerchant.setBankAccount(account);
-
         // Add merchant
-        service.addMerchant(newMerchant);
+        merchant.setMerchantId(UUID.randomUUID().toString());
+        service.addMerchant(merchant);
 
-        return merchantId;
+        return merchant.getMerchantId();
     }
 
     @DELETE
