@@ -2,6 +2,8 @@ package org.restadapter;
 
 import businesslogic.Customer;
 import java.util.Set;
+
+import businesslogic.NotFoundException;
 import businesslogic.PaymentRegister;
 
 import javax.ws.rs.*;
@@ -37,13 +39,13 @@ public class CustomerResource {
         // Add customer
         service.addCustomer(newCustomer);
 
-        return Response.fromResponse(Response.status(Response.Status.OK).build()).build();
+        return Response.fromResponse(Response.status(Response.Status.CREATED).build()).build();
     }
 
     @DELETE
     @Path("/{cid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteCustomer(@QueryParam(value = "cid") String customerId){
+    public void deleteCustomer(@PathParam("cid") String customerId){
         service.removeCustomer(customerId);
     }
 

@@ -2,6 +2,7 @@ package org.restadapter;
 
 import businesslogic.Customer;
 import businesslogic.Merchant;
+import businesslogic.NotFoundException;
 import businesslogic.PaymentRegister;
 
 import javax.ws.rs.*;
@@ -19,6 +20,18 @@ public class MerchantResource {
     @Path("/{mid}")
     public Merchant getMerchant(@PathParam("mid") String merchantId){
         return service.getMerchant(merchantId);
+    }
+
+    // workaround example
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/validation/{mid}")
+    public Response validateMerchant(@PathParam("mid") String merchantId){
+        if (service.getMerchant(merchantId) != null) {
+            return Response.fromResponse(Response.status(Response.Status.OK).build()).build();
+        } else {
+            return Response.fromResponse(Response.status(Response.Status.NOT_FOUND).build()).build();
+        }
     }
 
     @POST
@@ -39,13 +52,13 @@ public class MerchantResource {
         // Add merchant
         service.addMerchant(newMerchant);
 
-        return Response.fromResponse(Response.status(Response.Status.OK).build()).build();
+        return Response.fromResponse(Response.status(Response.Status.CREATED).build()).build();
     }
 
     @DELETE
     @Path("/{mid}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteMerchant(@QueryParam(value = "mid") String merchantId){
+    public void deleteMerchant(@PathParam("mid") String merchantId){
         service.removeMerchant(merchantId);
     }
 
