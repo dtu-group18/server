@@ -24,7 +24,7 @@ public class CustomerResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{cid}/{name}/{cpr}/{account}")
-    public Response register(@PathParam("cid") String customerId,
+    public String register(@PathParam("cid") String customerId,
                              @PathParam("name") String name,
                              @PathParam("cpr") String cpr,
                              @PathParam("account") String account)
@@ -39,7 +39,7 @@ public class CustomerResource {
         // Add customer
         service.addCustomer(newCustomer);
 
-        return Response.fromResponse(Response.status(Response.Status.CREATED).build()).build();
+        return customerId;
     }
 
     @DELETE

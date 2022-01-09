@@ -37,14 +37,14 @@ public class MerchantResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{mid}/{name}/{cpr}/{account}")
-    public Response register(@PathParam("mid") String mid,
+    public String register(@PathParam("mid") String merchantId,
                              @PathParam("name") String name,
                              @PathParam("cpr") String cpr,
                              @PathParam("account") String account)
     {
         // Create merchant model
         Merchant newMerchant = new Merchant();
-        newMerchant.setMerchantId(mid);
+        newMerchant.setMerchantId(merchantId);
         newMerchant.setName(name);
         newMerchant.setCpr(cpr);
         newMerchant.setBankAccount(account);
@@ -52,7 +52,7 @@ public class MerchantResource {
         // Add merchant
         service.addMerchant(newMerchant);
 
-        return Response.fromResponse(Response.status(Response.Status.CREATED).build()).build();
+        return merchantId;
     }
 
     @DELETE
