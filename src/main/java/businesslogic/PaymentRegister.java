@@ -1,5 +1,10 @@
 package businesslogic;
 
+import dtu.ws.fastmoney.BankService;
+import dtu.ws.fastmoney.BankServiceException_Exception;
+import dtu.ws.fastmoney.BankServiceService;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +16,9 @@ import java.util.Set;
 public class PaymentRegister {
     //--------Singleton pattern-----------------------------
     private static PaymentRegister register = new PaymentRegister();
+
+    // Bank service
+    BankService dtuBank = new BankServiceService().getBankServicePort();
 
     private final List<Payment> payments = new ArrayList<>();
     final Set<String> customers = new HashSet<>();
@@ -49,10 +57,18 @@ public class PaymentRegister {
      */
     public void addPayment(Payment payment) throws NotFoundException {
         //check for unknown costumer and merchant
-        if(getCustomer(payment.getCostumerId()) == null) throw new NotFoundException(String.format("customer with id %s is unknown", payment.getCostumerId()));
-        if(getMerchant(payment.getMerchantId()) == null) throw new NotFoundException(String.format("merchant with id %s is unknown", payment.getMerchantId()));
+        Customer c = getCustomer(payment.getCostumerId());
+        Merchant m = getMerchant(payment.getMerchantId());
+        if(c == null) throw new NotFoundException(String.format("customer with id %s is unknown", payment.getCostumerId()));
+        if(m == null) throw new NotFoundException(String.format("merchant with id %s is unknown", payment.getMerchantId()));
 
         payments.add(payment);
+
+        try {
+            dtuBank.transferMoneyFromTo(c.getBankAccount(),m.getBankAccount(), BigDecimal.valueOf(Integer.parseInt(payment.getAmount())),"Transfer Money");
+        } catch (BankServiceException_Exception e) {
+            e.printStackTrace();
+        }
     }
     //------------------------------------------------------------
 

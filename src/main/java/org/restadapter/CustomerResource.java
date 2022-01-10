@@ -51,6 +51,15 @@ public class CustomerResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
+    @Path("/{cid}/balance")
+    public int getBalance(@PathParam("cid") String customerId) {
+        Customer c = service.getCustomer(customerId);
+        return service.getBalance(c.getBankAccount());
+    }
+
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
         return "Hej Hej Customer!";
     }
