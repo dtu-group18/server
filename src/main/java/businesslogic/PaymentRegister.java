@@ -92,6 +92,16 @@ public class PaymentRegister {
         return null;
     }
 
+    public int getBalance(String identifier) {
+        try {
+            return dtuBank.getAccount(identifier).getBalance().intValue();
+        } catch (BankServiceException_Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
 
     public List<Payment> getPayments(){return payments;}
     public Set<Customer> getCustomerRegs(){return customerReg;}

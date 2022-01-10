@@ -1,6 +1,8 @@
 package org.restadapter;
 
 import businesslogic.Customer;
+
+import java.math.BigDecimal;
 import java.util.Set;
 import java.util.UUID;
 

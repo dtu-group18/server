@@ -64,6 +64,14 @@ public class MerchantResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
+    @Path("/{mid}/balance")
+    public int getBalance(@PathParam("mid") String merchantId) {
+        Merchant m = service.getMerchant(merchantId);
+        return service.getBalance(m.getBankAccount());
+    }
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
         return "Hej Hej Merchant!";
     }
