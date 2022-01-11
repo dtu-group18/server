@@ -125,7 +125,7 @@
         <executions>
           <execution>
             <id>generate-java-sources</id>
-            <phase>process-sources</phase>
+<!--            <phase>process-sources</phase>-->
             <goals>
               <goal>wsimport</goal>
             </goals>
