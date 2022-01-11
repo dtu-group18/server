@@ -23,18 +23,6 @@ public class MerchantResource {
         return service.getMerchant(merchantId);
     }
 
-    // workaround example
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/validation/{mid}")
-    public Response validateMerchant(@PathParam("mid") String merchantId){
-        if (service.getMerchant(merchantId) != null) {
-            return Response.fromResponse(Response.status(Response.Status.OK).build()).build();
-        } else {
-            return Response.fromResponse(Response.status(Response.Status.NOT_FOUND).build()).build();
-        }
-    }
-
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Consumes(MediaType.APPLICATION_JSON)

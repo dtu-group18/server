@@ -65,6 +65,7 @@ public class PaymentRegister {
         payments.add(payment);
 
         try {
+            // Bank service
             dtuBank.transferMoneyFromTo(c.getBankAccount(),m.getBankAccount(), BigDecimal.valueOf(Integer.parseInt(payment.getAmount())),"Transfer Money");
         } catch (BankServiceException_Exception e) {
             e.printStackTrace();
@@ -94,6 +95,7 @@ public class PaymentRegister {
 
     public int getBalance(String identifier) {
         try {
+            // Bank service
             return dtuBank.getAccount(identifier).getBalance().intValue();
         } catch (BankServiceException_Exception e) {
             e.printStackTrace();
@@ -101,7 +103,6 @@ public class PaymentRegister {
 
         return 0;
     }
-
 
     public List<Payment> getPayments(){return payments;}
     public Set<Customer> getCustomerRegs(){return customerReg;}
