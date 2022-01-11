@@ -36,7 +36,8 @@ public class PaymentResource {
             service.addPayment(payment);
             return Response.fromResponse(Response.status(Response.Status.OK).build()).build();
         } catch (NotFoundException e) {
-            return Response.fromResponse(Response.status(Response.Status.NOT_FOUND.getStatusCode(), e.getMessage()).build()).build();
+//            return Response.fromResponse(Response.status(Response.Status.NOT_FOUND.getStatusCode(), e.getMessage()).build()).build();
+            return Response.status(Response.Status.NOT_FOUND.getStatusCode()).header("errMsg", e.getMessage()).build();
         }
     }
 
