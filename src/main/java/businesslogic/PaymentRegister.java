@@ -18,7 +18,7 @@ public class PaymentRegister {
     private static PaymentRegister register = new PaymentRegister();
 
     // Bank service
-    BankService dtuBank = new BankServiceService().getBankServicePort();
+    //BankService dtuBank = new BankServiceService().getBankServicePort();
 
     private final List<Payment> payments = new ArrayList<>();
     final Set<String> customers = new HashSet<>();
@@ -65,6 +65,7 @@ public class PaymentRegister {
         payments.add(payment);
 
         try {
+            BankService dtuBank = new BankServiceService().getBankServicePort();
             // Bank service
             dtuBank.transferMoneyFromTo(c.getBankAccount(),m.getBankAccount(), BigDecimal.valueOf(Integer.parseInt(payment.getAmount())),"Transfer Money");
         } catch (BankServiceException_Exception e) {
@@ -95,6 +96,7 @@ public class PaymentRegister {
 
     public int getBalance(String identifier) {
         try {
+            BankService dtuBank = new BankServiceService().getBankServicePort();
             // Bank service
             return dtuBank.getAccount(identifier).getBalance().intValue();
         } catch (BankServiceException_Exception e) {

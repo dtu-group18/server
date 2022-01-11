@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "BankServiceService", targetNamespace = "http://fastmoney.ws.dtu/", wsdlLocation = "http://fm-00.compute.dtu.dk/BankService.wsdl.xml?wsdl")
+@WebServiceClient(name = "BankServiceService", targetNamespace = "http://fastmoney.ws.dtu/", wsdlLocation = "http://fm-00.compute.dtu.dk/BankService.wsdl.xml")
 public class BankServiceService
     extends Service
 {
@@ -30,7 +30,7 @@ public class BankServiceService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://fm-00.compute.dtu.dk/BankService.wsdl.xml?wsdl");
+            url = new URL("http://fm-00.compute.dtu.dk/BankService.wsdl.xml");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
