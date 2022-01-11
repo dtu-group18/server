@@ -62,15 +62,19 @@ public class PaymentRegister {
         if(c == null) throw new NotFoundException("customer is unknown");
         if(m == null) throw new NotFoundException("merchant is unknown");
 
-        payments.add(payment);
-
         try {
+            // Put the bank in a wrapper/adapter to mask the BankServiceException_Exception
             BankService dtuBank = new BankServiceService().getBankServicePort();
+
             // Bank service
             dtuBank.transferMoneyFromTo(c.getBankAccount(),m.getBankAccount(), BigDecimal.valueOf(Integer.parseInt(payment.getAmount())),"Transfer Money");
         } catch (BankServiceException_Exception e) {
             e.printStackTrace();
+            // custom exception paymentFailed no need to throw nofoundexception
         }
+
+        // Last
+        payments.add(payment);
     }
     //------------------------------------------------------------
 
