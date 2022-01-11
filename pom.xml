@@ -129,16 +129,16 @@
             <goals>
               <goal>wsimport</goal>
             </goals>
-            <configuration>
-              <extension>true</extension>
-              <wsdlUrls>
-                <wsdlUrl>http://fm-00.compute.dtu.dk/BankService.wsdl.xml</wsdlUrl>
-              </wsdlUrls>
-              <packageName>dtu.ws.fastmoney</packageName>
-              <sourceDestDir>src/main/java</sourceDestDir>
-            </configuration>
           </execution>
         </executions>
+        <configuration>
+          <extension>true</extension>
+          <wsdlUrls>
+            <wsdlUrl>http://fm-00.compute.dtu.dk/BankService.wsdl.xml</wsdlUrl>
+          </wsdlUrls>
+          <packageName>dtu.ws.fastmoney</packageName>
+          <sourceDestDir>src/main/java</sourceDestDir>
+        </configuration>
 <!--        <dependencies>-->
 <!--          <dependency>-->
 <!--            <groupId>javax.annotation</groupId>-->
