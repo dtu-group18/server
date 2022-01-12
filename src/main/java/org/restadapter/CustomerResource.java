@@ -12,7 +12,7 @@ import businesslogic.PaymentRegister;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-// Test comment (delete after)
+
 @Path("/customer")
 public class CustomerResource {
     PaymentRegister service = PaymentRegister.getRegister();
