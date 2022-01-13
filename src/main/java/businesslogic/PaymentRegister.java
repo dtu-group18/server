@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
+//test comment
 /**
  * class that represents a register of multiple payment objects
  */
